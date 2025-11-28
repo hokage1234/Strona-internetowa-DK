@@ -1,5 +1,12 @@
 export type Language = 'PL' | 'EN';
 
+export interface Product {
+  id: number;
+  name: string;
+  price: string;
+  linkLabel: string;
+}
+
 export interface TranslationStructure {
   nav: {
     about: string;
@@ -18,7 +25,8 @@ export interface TranslationStructure {
     shop: {
       title: string;
       content: string;
-      cta: string;
+      mainCta: string;
+      products: Product[];
     };
     newsletter: {
       title: string;

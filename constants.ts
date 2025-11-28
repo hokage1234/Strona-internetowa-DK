@@ -27,7 +27,12 @@ export const CONTENT: Record<'PL' | 'EN', TranslationStructure> = {
       shop: {
         title: "ZASOBY & SKLEP",
         content: "Ekskluzywne materiały, produkty cyfrowe i limitowane kolekcje. Wszystko zaprojektowane z myślą o estetyce i funkcjonalności.",
-        cta: "PRZEJDŹ DO SKLEPU"
+        mainCta: "ZOBACZ WSZYSTKIE PRODUKTY",
+        products: [
+          { id: 1, name: "E-BOOK: SZTUKA MINIMALIZMU", price: "49 PLN", linkLabel: "ZOBACZ" },
+          { id: 2, name: "PRESETY: MONOCHROME", price: "79 PLN", linkLabel: "ZOBACZ" },
+          { id: 3, name: "KONSULTACJA 1:1", price: "299 PLN", linkLabel: "ZOBACZ" }
+        ]
       },
       newsletter: {
         title: "NEWSLETTER",
@@ -66,7 +71,12 @@ export const CONTENT: Record<'PL' | 'EN', TranslationStructure> = {
       shop: {
         title: "RESOURCES & SHOP",
         content: "Exclusive materials, digital products, and limited collections. Everything designed with aesthetics and functionality in mind.",
-        cta: "GO TO SHOP"
+        mainCta: "VIEW ALL PRODUCTS",
+        products: [
+          { id: 1, name: "E-BOOK: ART OF MINIMALISM", price: "$12", linkLabel: "VIEW" },
+          { id: 2, name: "PRESETS: MONOCHROME", price: "$20", linkLabel: "VIEW" },
+          { id: 3, name: "CONSULTATION 1:1", price: "$75", linkLabel: "VIEW" }
+        ]
       },
       newsletter: {
         title: "NEWSLETTER",

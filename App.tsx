@@ -4,6 +4,7 @@ import { CONTENT, LINKS } from './constants';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 
 // Reusable SVG Icon for Coffee
 const CoffeeIcon = () => (
@@ -31,8 +32,11 @@ const App: React.FC = () => {
   const t = CONTENT[lang];
 
   return (
-    <div className="min-h-screen bg-white text-black selection:bg-black selection:text-white">
+    <div className="min-h-screen bg-white text-black selection:bg-black selection:text-white relative">
       
+      {/* Scroll To Top Button */}
+      <ScrollToTop />
+
       {/* 1. HEADER AREA */}
       <Navbar lang={lang} setLang={setLang} t={t} />
 
@@ -40,10 +44,10 @@ const App: React.FC = () => {
       <Hero t={t} />
 
       {/* 3. PAGE SECTIONS */}
-      <main className="w-full max-w-4xl mx-auto px-6 pb-20 space-y-32">
+      <main className="w-full max-w-7xl mx-auto px-6 pb-20 space-y-32">
         
         {/* Section: O MARCE / ABOUT */}
-        <section id="about" className="flex flex-col items-center text-center space-y-6 pt-20">
+        <section id="about" className="flex flex-col items-center text-center space-y-6 pt-20 max-w-4xl mx-auto">
           <h2 className="text-xs font-bold tracking-[0.3em] uppercase text-gray-400">
             01 — {t.nav.about}
           </h2>
@@ -56,35 +60,67 @@ const App: React.FC = () => {
         </section>
 
         {/* Section: SKLEP / SHOP */}
-        <section id="shop" className="flex flex-col items-center text-center space-y-6 pt-20">
-          <h2 className="text-xs font-bold tracking-[0.3em] uppercase text-gray-400">
-            02 — {t.nav.shop}
-          </h2>
-          <div className="bg-gray-50 p-12 w-full flex flex-col items-center space-y-6 border border-gray-100">
-            <h3 className="text-2xl font-semibold">
+        <section id="shop" className="flex flex-col items-center text-center space-y-12 pt-20">
+          <div className="space-y-4">
+            <h2 className="text-xs font-bold tracking-[0.3em] uppercase text-gray-400">
+              02 — {t.nav.shop}
+            </h2>
+            <h3 className="text-3xl font-semibold">
               {t.sections.shop.title}
             </h3>
-            <p className="text-gray-600 max-w-md">
+            <p className="text-gray-600 max-w-md mx-auto">
               {t.sections.shop.content}
             </p>
+          </div>
+
+          {/* Product Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
+            {t.sections.shop.products.map((product) => (
+              <div key={product.id} className="flex flex-col items-start text-left group cursor-pointer">
+                {/* Image Placeholder */}
+                <div className="w-full aspect-[4/5] bg-gray-100 mb-4 flex items-center justify-center relative overflow-hidden">
+                   <span className="text-9xl font-black text-gray-200 select-none group-hover:scale-110 transition-transform duration-500">
+                     {product.id}
+                   </span>
+                   {/* Overlay on hover (optional luxury touch) */}
+                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300"></div>
+                </div>
+                
+                {/* Product Info */}
+                <h4 className="font-bold text-sm tracking-wide uppercase">{product.name}</h4>
+                <span className="text-xs text-gray-500 mt-1 mb-4">{product.price}</span>
+                
+                {/* CTA Link styled with border-bottom */}
+                <a 
+                  href={LINKS.SHOP} 
+                  className="inline-block border-b border-black pb-0.5 text-[10px] font-bold tracking-[0.2em] uppercase hover:text-gray-600 hover:border-gray-600 transition-colors"
+                >
+                  {product.linkLabel}
+                </a>
+              </div>
+            ))}
+          </div>
+
+          {/* Main Shop Link */}
+          <div className="pt-8">
             <a 
               href={LINKS.SHOP} 
-              className="inline-block border-b-2 border-black pb-1 text-sm font-bold tracking-widest hover:text-gray-600 hover:border-gray-600 transition-colors"
+              className="inline-block px-8 py-3 bg-gray-50 border border-gray-200 text-xs font-bold tracking-widest hover:bg-black hover:text-white hover:border-black transition-all duration-300"
             >
-              {t.sections.shop.cta}
+              {t.sections.shop.mainCta}
             </a>
           </div>
         </section>
 
         {/* Section: NEWSLETTER */}
-        <section id="newsletter" className="flex flex-col items-center text-center space-y-6 pt-20">
+        <section id="newsletter" className="flex flex-col items-center text-center space-y-6 pt-20 max-w-4xl mx-auto">
           <h2 className="text-xs font-bold tracking-[0.3em] uppercase text-gray-400">
             03 — {t.nav.newsletter}
           </h2>
           <h3 className="text-3xl font-light">
             {t.sections.newsletter.title}
           </h3>
-          <p className="text-gray-500 mb-4">{t.sections.newsletter.content}</p>
+          <p className="text-gray-500 mb-4 max-w-md">{t.sections.newsletter.content}</p>
           <form className="flex flex-col md:flex-row gap-4 w-full max-w-md" onSubmit={(e) => e.preventDefault()}>
             <input 
               type="email" 
@@ -101,7 +137,7 @@ const App: React.FC = () => {
         </section>
 
         {/* Section: DONATION */}
-        <section id="donate" className="flex flex-col items-center text-center space-y-8 pt-20 pb-10">
+        <section id="donate" className="flex flex-col items-center text-center space-y-8 pt-20 pb-10 max-w-4xl mx-auto">
           <div className="w-12 h-[1px] bg-gray-200 mb-4"></div>
           <h3 className="text-xl md:text-2xl font-medium">
             {t.sections.donate.title}
@@ -116,7 +152,7 @@ const App: React.FC = () => {
         </section>
 
         {/* Section: CONTACT (Simple) */}
-        <section id="contact" className="flex flex-col items-center text-center pt-10">
+        <section id="contact" className="flex flex-col items-center text-center pt-10 pb-10">
            <a href={LINKS.CONTACT} className="text-gray-400 hover:text-black transition-colors text-sm tracking-widest">
              {t.sections.contact.title}
            </a>
